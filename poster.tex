@@ -160,7 +160,32 @@ This section reports about ongoing work for shortening bug path length.
 
 \subsection*{Bugs in the ASTImporter}
 
-Section about C-Reduce script and how merging bugs are automatically identified.
+\begin{center}\vspace{1cm}
+\includegraphics[width=0.8\linewidth]{reducing_process}
+\captionof{figure}{\color{Green} Process of ASTImporter failure debugging with 
+reducer}
+\label{fig:reducing-process}
+\end{center}\vspace{1cm}
+
+When an failure is revealed in ASTImporter then it is usually caused by an 
+unhandled C/C++ structure or by assembling an invalid AST. Suppose that the 
+error happens in \texttt{main.cpp}. Figure \ref{fig:reducing-process} shows the 
+debugging process.
+\begin{description}
+  \item[File collection] Many times we don't have access to the analyzed code 
+  base which produces the error. When Clang crashes because of an ASTImporter 
+  error, first the files of dependent translation units (i.e. those are 
+  containing definitions of referred symbols) are collected recursively 
+  together with all the build information which is required to reproduce the 
+  error remotely.
+  
+  \item[Source reduction] In the second phase we use C-Reduce \cite{creduce} to 
+  create a minimal version of the code which still produces the error. First 
+  the main file is reduced by removing code fragments. If no more code can be 
+  removed by providing the same error message, the reduction stops. This 
+  process is also accomplished on dependent files.
+\end{description}
+
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{placeholder}
 \captionof{figure}{\color{Green} C-reduce method}
@@ -200,7 +225,8 @@ FIGURE
 %	REFERENCES
 %----------------------------------------------------------------------------------------
 
-\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+\nocite{*} % Print all references regardless of whether they were cited in the 
+%%poster or not
 \bibliographystyle{plain} % Plain referencing style
 \bibliography{sample} % Use the example bibliography file sample.bib
 
