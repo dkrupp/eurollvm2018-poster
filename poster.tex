@@ -146,12 +146,6 @@ The following project are analyzed in detail
 \end{center}\vspace{1cm}
 
 
-\begin{center}\vspace{1cm}
-\includegraphics[width=0.8\linewidth]{placeholder}
-\captionof{figure}{\color{Green} Distribution of analysis times}
-\end{center}\vspace{1cm}
-
-
 \section*{Ongoing work}
 
 This section reports about ongoing work for shortening bug path length. 
@@ -186,22 +180,36 @@ debugging process.
   process is also accomplished on dependent files.
 \end{description}
 
-\begin{center}\vspace{1cm}
-\includegraphics[width=0.8\linewidth]{placeholder}
-\captionof{figure}{\color{Green} C-reduce method}
-\end{center}\vspace{1cm}
-
 
 \subsection*{Shortening Bug Path length}
 
-Section about ongoing wokr of Tibi and SzecsiPeti 
+When the list of bug paths is given then programmers start evaluating the 
+results. There are some circumstances which make this process harder. Sometimes 
+the length of such a path is about 30 steps and there are also duplicate 
+results. Reviewing these is an unnecessary effort.
 
 \begin{center}\vspace{1cm}
-\includegraphics[width=0.8\linewidth]{placeholder}
-\captionof{figure}{\color{Green} Figure caption}
+  \includegraphics[width=0.5\linewidth]{bugpath}
+  \captionof{figure}{\color{Green} Unnecessary bug points}
+  \label{fig:bugpath}
 \end{center}\vspace{1cm}
 
-FIGURE
+Figure \ref{fig:bugpath} shows an example where the \texttt{if} statements are 
+part of the bug path, however, these don't take part in the establishment of 
+the bug.
+
+We are working on the elimination of the length and number of bug paths by 
+three methods:
+\begin{itemize}
+  \item The irrelevant bug points can be filtered out by a method similar to a 
+  slicing algorithm.
+  \item Some bug path prefixes can be removed if those don't play role in 
+  reaching the final bug point.
+  \item Some bug paths are considered the same if they refer the same bug. The 
+  number of bugs can be diminished by marking these to be redundant. This will 
+  be accomplished by the usage of uniqueing location among multiple translation 
+  units.
+\end{itemize}
 
 
 %----------------------------------------------------------------------------------------
